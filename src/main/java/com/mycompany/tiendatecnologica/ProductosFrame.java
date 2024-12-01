@@ -31,6 +31,7 @@ public class ProductosFrame extends javax.swing.JFrame {
             json.crearJson();
             json.volcarDatos();  
         }
+        mostrarProductos(new ProductoDAO().obtenerProductos("Ropa"));
     }
 
     /**
@@ -167,7 +168,7 @@ public class ProductosFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,9 +179,9 @@ public class ProductosFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
-
-       System.out.println(new ProductoDAO().obtenerProductos(jTextField1.getText()));
-       mostrarProductos(new ProductoDAO().obtenerProductos(jTextField1.getText()));   
+        ArrayList<Producto> productos=new ProductoDAO().obtenerProductos(jTextField1.getText());
+        if(productos.isEmpty()) return;
+        mostrarProductos(productos);   
     }//GEN-LAST:event_botonBuscarMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -194,23 +195,25 @@ public class ProductosFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void img1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_img1MouseClicked
-        ProductoFrame pf=new ProductoFrame(productos.get(0));
-        pf.setVisible(true);
-        this.dispose();
+        abrirProducto(0);
     }//GEN-LAST:event_img1MouseClicked
 
     private void img2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_img2MouseClicked
-        ProductoFrame pf=new ProductoFrame(productos.get(1));
-        pf.setVisible(true);
-        this.dispose();
+        abrirProducto(1);
     }//GEN-LAST:event_img2MouseClicked
 
     private void img3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_img3MouseClicked
-        ProductoFrame pf=new ProductoFrame(productos.get(2));
-        pf.setVisible(true);
-        this.dispose();
+        abrirProducto(2);
     }//GEN-LAST:event_img3MouseClicked
 
+    private void abrirProducto(int indice){
+        
+        if(productos==null) return;       
+        ProductoFrame pf=new ProductoFrame(productos.get(indice));
+        pf.setVisible(true);
+        this.dispose();
+    }
+    
     private void mostrarProductos(ArrayList <Producto> productos){  
         this.productos=new ArrayList<>();
         for(int i=0;i<imagenesLabel.length;i++){      

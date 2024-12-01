@@ -1,3 +1,4 @@
+com\mycompany\tiendatecnologica\UsuariosFrame$2.class
 com\mycompany\tiendatecnologica\ProductoFrame.class
 com\mycompany\tiendatecnologica\ProductosFrame$3.class
 com\mycompany\tiendatecnologica\FramePrincipal.class
@@ -7,12 +8,18 @@ com\mycompany\tiendatecnologica\BBDD\Conexion.class
 com\mycompany\tiendatecnologica\ProductosFrame$6.class
 com\mycompany\tiendatecnologica\BBDD\ProductoDAO.class
 com\mycompany\tiendatecnologica\ProductosFrame$1.class
+com\mycompany\tiendatecnologica\FramePrincipal$3.class
 com\mycompany\tiendatecnologica\ProductosFrame$4.class
+com\mycompany\tiendatecnologica\UsuariosFrame.class
 com\mycompany\tiendatecnologica\BBDD\Json.class
 com\mycompany\tiendatecnologica\ProductosFrame.class
+com\mycompany\tiendatecnologica\UsuariosFrame$1.class
+com\mycompany\tiendatecnologica\JTableCustom$1.class
 com\mycompany\tiendatecnologica\ProductoFrame$1.class
 com\mycompany\tiendatecnologica\ProductosFrame$2.class
 com\mycompany\tiendatecnologica\FramePrincipal$1.class
+com\mycompany\tiendatecnologica\JTableCustom.class
 com\mycompany\tiendatecnologica\FramePrincipal$2.class
+com\mycompany\tiendatecnologica\ModeloTabla.class
 com\mycompany\tiendatecnologica\ProductosFrame$5.class
 com\mycompany\tiendatecnologica\Producto.class

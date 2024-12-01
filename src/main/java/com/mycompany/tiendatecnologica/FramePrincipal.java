@@ -54,6 +54,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Usuarios");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 590, 90));
 
         jLabel3.setBackground(new java.awt.Color(120, 13, 201));
@@ -112,6 +117,14 @@ public class FramePrincipal extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+
+        UsuariosFrame uf=new UsuariosFrame();
+        uf.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
