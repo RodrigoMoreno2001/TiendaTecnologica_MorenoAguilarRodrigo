@@ -24,7 +24,7 @@ public class ProductoDAO {
         
         ArrayList<Producto> productos=new ArrayList<>();
         try(Conexion conn=new Conexion();
-            PreparedStatement ps=conn.getConn().prepareStatement("SELECT * FROM ProductoImagenes INNER JOIN Productos ON ProductoImagenes.producto_id=Productos.id INNER JOIN Categorias ON Productos.categoria_id=Categorias.id WHERE Categorias.nombre=? ORDER BY imagen")){
+            PreparedStatement ps=conn.getConn().prepareStatement("SELECT * FROM ProductoImagenes INNER JOIN Productos as p ON ProductoImagenes.producto_id=p.id INNER JOIN Categorias ON p.categoria_id=Categorias.id WHERE Categorias.nombre=? ORDER BY imagen")){
             
             ps.setString(1,categoria);
             
@@ -36,7 +36,7 @@ public class ProductoDAO {
                     String img=rs.getString("imagen"); 
                     rs.next(); 
                     productos.add(new Producto(
-                            rs.getInt("id"),
+                            rs.getInt("p.id"),
                             rs.getInt("categoria_id"),
                             rs.getString("nombre"),
                             rs.getDouble("precio"),

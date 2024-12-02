@@ -1,11 +1,20 @@
 package com.mycompany.tiendatecnologica;
 
+import com.mycompany.tiendatecnologica.BBDD.Conexion;
 import java.awt.Image;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ProductoFrame extends javax.swing.JFrame {
     private JFrame anteriorFrame;
+    private int idProducto;
     public ProductoFrame(Producto producto, JFrame frame) {
         initComponents();
 
@@ -29,6 +38,7 @@ public class ProductoFrame extends javax.swing.JFrame {
         
         setLocationRelativeTo(frame);
         anteriorFrame=frame;
+        idProducto=producto.getId();
     }
 
     @SuppressWarnings("unchecked")
@@ -59,7 +69,9 @@ public class ProductoFrame extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(200, 200, 200));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel3.setBackground(new java.awt.Color(120, 13, 201));
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(120, 13, 201));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Productos");
 
@@ -131,6 +143,11 @@ public class ProductoFrame extends javax.swing.JFrame {
         botonRealizarCompra.setForeground(new java.awt.Color(255, 255, 255));
         botonRealizarCompra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         botonRealizarCompra.setText("Realizar compra");
+        botonRealizarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonRealizarCompraMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -220,6 +237,33 @@ public class ProductoFrame extends javax.swing.JFrame {
     private void idUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idUsuarioActionPerformed
+
+    private void botonRealizarCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRealizarCompraMouseClicked
+        int cantidadProducto=0;
+        int idUsuario=0; 
+        try{
+            cantidadProducto=Integer.parseInt(this.cantidadProducto.getText());
+            idUsuario=Integer.parseInt(this.idUsuario.getText());  
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Error de formato", "La cantidad y el id deben ser números enteros",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }   
+
+        try(Conexion conn=new Conexion();
+            PreparedStatement ps=conn.getConn().prepareStatement("INSERT INTO HistorialCompras(usuario_id, producto_id, cantidad, fecha) VALUES (?,?,?,?)")){
+            ps.setInt(1,idUsuario);
+            ps.setInt(2,idProducto);
+            ps.setInt(3,cantidadProducto);
+            ps.setDate(4,Date.valueOf(LocalDate.now()));
+            
+            ps.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_botonRealizarCompraMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
