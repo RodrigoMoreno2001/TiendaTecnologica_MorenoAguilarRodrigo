@@ -120,7 +120,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
-        UsuariosFrame uf=new UsuariosFrame();
+        UsuariosFrame uf=new UsuariosFrame(this);
         uf.setVisible(true);
         this.dispose();
         

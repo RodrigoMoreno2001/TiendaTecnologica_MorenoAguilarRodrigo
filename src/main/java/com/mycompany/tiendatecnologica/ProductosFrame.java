@@ -9,6 +9,7 @@ import com.mycompany.tiendatecnologica.BBDD.ProductoDAO;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class ProductosFrame extends javax.swing.JFrame {
@@ -19,9 +20,9 @@ public class ProductosFrame extends javax.swing.JFrame {
     private ArrayList<Producto> productos;
     
     
-    public ProductosFrame(FramePrincipal main) {
+    public ProductosFrame(JFrame frame) {
         initComponents();
-        setLocationRelativeTo(main);
+        setLocationRelativeTo(frame);
         setResizable(false);
         imagenesLabel=new JLabel[]{img1,img2,img3};
         nombresLabel=new JLabel[]{nombre1,nombre2,nombre3};
@@ -209,7 +210,7 @@ public class ProductosFrame extends javax.swing.JFrame {
     private void abrirProducto(int indice){
         
         if(productos==null) return;       
-        ProductoFrame pf=new ProductoFrame(productos.get(indice));
+        ProductoFrame pf=new ProductoFrame(productos.get(indice),this);
         pf.setVisible(true);
         this.dispose();
     }
@@ -226,7 +227,6 @@ public class ProductosFrame extends javax.swing.JFrame {
             imagenesLabel[i].setIcon(imagen);
             nombresLabel[i].setText(producto.getNombre());
             preciosLabel[i].setText(String.valueOf(producto.getPrecio())+"€");
-            System.out.println(getClass().getResource("/"+img));
             this.productos.add(producto);
         } 
     }

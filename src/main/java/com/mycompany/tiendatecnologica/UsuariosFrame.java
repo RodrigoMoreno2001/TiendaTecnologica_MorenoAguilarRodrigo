@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,9 +20,10 @@ public class UsuariosFrame extends javax.swing.JFrame {
 
     private ModeloTabla model;
     
-    public UsuariosFrame() {
+    public UsuariosFrame(JFrame frame) {
         model=new ModeloTabla(new String[]{"ID","Nombre","Email","Direccion"},cargarDatos());
         initComponents();
+        setLocationRelativeTo(frame);
     }
     
     private Object[][] cargarDatos(){
@@ -41,7 +43,7 @@ public class UsuariosFrame extends javax.swing.JFrame {
                         datos[cont][0] = rs.getInt("id");
                         datos[cont][1] = rs.getString("nombre");
                         datos[cont][2] = rs.getString("email");
-                        String direccion=rs.getString("direccion_calle")+rs.getInt("direccion_numero")+rs.getString("direccion_ciudad")+rs.getString("direccion_pais");
+                        String direccion=rs.getString("direccion_calle")+" "+rs.getInt("direccion_numero")+", "+rs.getString("direccion_ciudad")+", "+rs.getString("direccion_pais");
                         datos[cont][3] = direccion;
                         cont++;
                     }
@@ -125,41 +127,6 @@ public class UsuariosFrame extends javax.swing.JFrame {
         fp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuariosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsuariosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsuariosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsuariosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UsuariosFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

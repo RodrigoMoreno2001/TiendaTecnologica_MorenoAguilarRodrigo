@@ -2,10 +2,11 @@ package com.mycompany.tiendatecnologica;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 public class ProductoFrame extends javax.swing.JFrame {
-
-    public ProductoFrame(Producto producto) {
+    private JFrame anteriorFrame;
+    public ProductoFrame(Producto producto, JFrame frame) {
         initComponents();
 
         ImageIcon img1=new ImageIcon(getClass().getResource("/"+producto.getImagenes().get(0)));
@@ -25,7 +26,9 @@ public class ProductoFrame extends javax.swing.JFrame {
         descripcionProducto.setText("Descripción:\n\n"+producto.getDescripcion()+"\n\nCaracterísticas: \n\n   - "+producto.getCaracteristicas().replaceAll(",","\n   -"));
 
         inventarioProducto.setText("Stock: "+String.valueOf(producto.getInventario()));
-
+        
+        setLocationRelativeTo(frame);
+        anteriorFrame=frame;
     }
 
     @SuppressWarnings("unchecked")
@@ -209,8 +212,8 @@ public class ProductoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        FramePrincipal fp=new FramePrincipal(this);
-        fp.setVisible(true);
+        JFrame frame=anteriorFrame;
+        frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
 
