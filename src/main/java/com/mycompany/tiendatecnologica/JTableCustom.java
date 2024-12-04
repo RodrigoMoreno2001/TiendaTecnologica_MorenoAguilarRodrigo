@@ -24,7 +24,6 @@ public class JTableCustom extends JTable {
         headerRenderer.setBackground(new Color(200, 200, 200));
         headerRenderer.setForeground(Color.BLACK);
         headerRenderer.setFont(new Font("Verdana", Font.BOLD, 20));
-        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Aplica el renderizador a cada columna
         for (int i = 0; i < this.getColumnCount(); i++) {

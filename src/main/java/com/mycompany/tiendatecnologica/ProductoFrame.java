@@ -1,6 +1,7 @@
 package com.mycompany.tiendatecnologica;
 
 import com.mycompany.tiendatecnologica.BBDD.Conexion;
+import com.mycompany.tiendatecnologica.BBDD.ProductoDAO;
 import java.awt.Image;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,8 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ProductoFrame extends javax.swing.JFrame {
+    
     private JFrame anteriorFrame;
     private int idProducto;
+    
     public ProductoFrame(Producto producto, JFrame frame) {
         initComponents();
 
@@ -39,6 +42,8 @@ public class ProductoFrame extends javax.swing.JFrame {
         setLocationRelativeTo(frame);
         anteriorFrame=frame;
         idProducto=producto.getId();
+        
+        descripcionProducto.setFocusable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -239,16 +244,31 @@ public class ProductoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_idUsuarioActionPerformed
 
     private void botonRealizarCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRealizarCompraMouseClicked
+        
         int cantidadProducto=0;
         int idUsuario=0; 
+        ProductoDAO pdao=new ProductoDAO();
+        
         try{
             cantidadProducto=Integer.parseInt(this.cantidadProducto.getText());
             idUsuario=Integer.parseInt(this.idUsuario.getText());  
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Error de formato", "La cantidad y el id deben ser números enteros",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"La cantidad y el id deben ser números enteros","Error de formato",JOptionPane.INFORMATION_MESSAGE);
             return;
-        }   
-
+        }
+        
+        int stock=pdao.getStock(idProducto);
+        if(stock<cantidadProducto){
+            JOptionPane.showMessageDialog(this,"La cantidad excede las existencias","Operacion fallida",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        int nuevoStock=stock-cantidadProducto;
+        
+        pdao.bajarStock(idProducto,nuevoStock);
+        
+        inventarioProducto.setText("Stock: "+String.valueOf(nuevoStock));
+        
         try(Conexion conn=new Conexion();
             PreparedStatement ps=conn.getConn().prepareStatement("INSERT INTO HistorialCompras(usuario_id, producto_id, cantidad, fecha) VALUES (?,?,?,?)")){
             ps.setInt(1,idUsuario);
@@ -258,11 +278,10 @@ public class ProductoFrame extends javax.swing.JFrame {
             
             ps.executeUpdate();
             
-            
         } catch (SQLException ex) {
             Logger.getLogger(ProductoFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        JOptionPane.showMessageDialog(this,"Compra realizada con éxito...", "Operacion completada",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonRealizarCompraMouseClicked
 
 

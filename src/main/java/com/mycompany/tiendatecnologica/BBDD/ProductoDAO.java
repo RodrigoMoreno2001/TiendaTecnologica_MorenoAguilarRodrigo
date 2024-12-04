@@ -52,4 +52,38 @@ public class ProductoDAO {
         }
         return productos;
     }  
+    
+    public int getStock(int id){
+        
+        try(Conexion conn=new Conexion();
+            PreparedStatement ps=conn.getConn().prepareStatement("SELECT inventario FROM Productos WHERE id=?")){
+            
+            ps.setInt(1,id);
+            
+            try(ResultSet rs=ps.executeQuery()){
+                rs.next();
+                
+                return rs.getInt(1); 
+            }  
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    } 
+    
+    public void bajarStock(int id,int nuevoStock){
+        
+        try(Conexion conn=new Conexion();
+            PreparedStatement ps=conn.getConn().prepareStatement("UPDATE Productos SET inventario=? WHERE id=?")){
+            
+            ps.setInt(1,nuevoStock);
+            ps.setInt(2,id);
+            
+            ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
