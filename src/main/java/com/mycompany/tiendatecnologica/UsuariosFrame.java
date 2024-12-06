@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.tiendatecnologica;
 
 import com.mycompany.tiendatecnologica.BBDD.Conexion;
@@ -11,11 +7,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-
-/**
- *
- * @author rodri_2
- */
 public class UsuariosFrame extends javax.swing.JFrame {
 
     private ModeloTabla model;
@@ -25,7 +16,10 @@ public class UsuariosFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(frame);
     }
-    
+    /* 
+        Mi clase ModeloTabla recoge un array de Object[][], este método
+        se encarga de rellenar esta estructura de datos y devolverla
+    */
     private Object[][] cargarDatos(){
          Object[][] datos=null;
         try(Conexion conn=new Conexion();

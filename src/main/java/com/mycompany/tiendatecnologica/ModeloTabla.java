@@ -8,10 +8,8 @@ public class ModeloTabla extends AbstractTableModel {
     private Object[][] datos;
 
     public ModeloTabla(String[] columnas,Object[][] datos){
-        
         this.columnas=columnas;
         this.datos=datos;
-        
     }
     
     @Override

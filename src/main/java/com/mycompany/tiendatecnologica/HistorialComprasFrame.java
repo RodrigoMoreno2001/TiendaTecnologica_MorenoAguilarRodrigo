@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.tiendatecnologica;
 
 import com.mycompany.tiendatecnologica.BBDD.Conexion;
@@ -12,10 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
-/**
- *
- * @author alumno
- */
 public class HistorialComprasFrame extends javax.swing.JFrame {
 
     private ModeloTabla model;
@@ -26,14 +18,21 @@ public class HistorialComprasFrame extends javax.swing.JFrame {
         setLocationRelativeTo(frame);
     }
     
+    /* 
+        Mi clase ModeloTabla recoge un array de Object[][], este método
+        se encarga de rellenar esta estructura de datos y devolverla
+    */ 
+    
     private Object[][] cargarDatos(){
-         Object[][] datos=null;
+        Object[][] datos=null;
         try(Conexion conn=new Conexion();
             Statement consulta=conn.getConn().createStatement()){
             
                 try(ResultSet rs=consulta.executeQuery("SELECT count(id) FROM HistorialCompras")){
                     rs.next();
+                    
                     int numeroTuplas=rs.getInt(1);
+                    
                     datos=new Object[numeroTuplas][5];
                 }
                 

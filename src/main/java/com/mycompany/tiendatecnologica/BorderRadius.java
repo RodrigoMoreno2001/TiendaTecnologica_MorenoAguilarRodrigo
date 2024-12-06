@@ -1,13 +1,19 @@
-
 package com.mycompany.tiendatecnologica;
 
 import javax.swing.*;
 import java.awt.*;
 
+/*
+    Esta clase extiende a JLabel con la finalidad de modificar su comportamient
+    y hacer que los bordes sean redondeados
+*/
+
 public class BorderRadius extends JLabel {
 
     private int cornerRadius;
-
+    
+    // Este constructor recibe un entero que determina qué tan redondeado estará ese label
+    
     public BorderRadius(String text, int cornerRadius) {
         super(text);
         this.cornerRadius = cornerRadius;

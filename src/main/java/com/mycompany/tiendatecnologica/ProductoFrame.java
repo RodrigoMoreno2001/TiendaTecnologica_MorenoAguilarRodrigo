@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 
 public class ProductoFrame extends javax.swing.JFrame {
     
-    private JFrame anteriorFrame;
-    private int idProducto;
+    private JFrame anteriorFrame; // guarda el estado del frame de Productos
+    private int idProducto; // guarda producto, para hacer compras
     
     public ProductoFrame(Producto producto, JFrame frame) {
         initComponents();
@@ -245,9 +245,11 @@ public class ProductoFrame extends javax.swing.JFrame {
 
     private void botonRealizarCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRealizarCompraMouseClicked
         
-        int cantidadProducto=0;
-        int idUsuario=0; 
+        int cantidadProducto;
+        int idUsuario; 
+        
         ProductoDAO pdao=new ProductoDAO();
+        int stock=pdao.getStock(idProducto);
         
         try{
             cantidadProducto=Integer.parseInt(this.cantidadProducto.getText());
@@ -257,7 +259,6 @@ public class ProductoFrame extends javax.swing.JFrame {
             return;
         }
         
-        int stock=pdao.getStock(idProducto);
         if(stock<cantidadProducto){
             JOptionPane.showMessageDialog(this,"La cantidad excede las existencias","Operacion fallida",JOptionPane.INFORMATION_MESSAGE);
             return;

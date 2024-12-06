@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
+
+/*
+    Esta clase extiende a JTable para modificar su comportamiento interno
+*/
 
 public class JTableCustom extends JTable {
     
@@ -48,6 +51,7 @@ public class JTableCustom extends JTable {
                     c.setForeground(Color.BLACK);
                 }
                 
+                // Letras en verde cuando se selecciona la fila
                 if (isSelected) c.setForeground(Color.GREEN);    
                 
                 return c;
